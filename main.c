@@ -75,18 +75,73 @@ void printGraph(graph *m_graph) {
   }
 }
 
+// Now let's implment our DFS algo
+
+void DFS(graph *m_graph, int vertex) {
+  node *adj_list = m_graph->adj_list[vertex];
+  node *temp = adj_list;
+
+  m_graph->visited[vertex] = 1;
+  printf("Visited %d\n", vertex);
+
+  while (temp != NULL) {
+    int connected_vertex = temp->vertex;
+    if (m_graph->visited[connected_vertex] == 0)
+      DFS(m_graph, connected_vertex);
+    temp = temp->next;
+  }
+}
+
+int maze[5][5] = {{0, 1, 0, 0, 0},
+                  {0, 1, 0, 1, 0},
+                  {0, 0, 0, 1, 0},
+                  {0, 1, 1, 1, 0},
+                  {0, 0, 0, 0, 0}};
+
+int getVertex(int row, int col, int ncols) { return row * ncols + col; }
+
+void createGraphFromMaze(graph *graph, int maze[5][5], int nrows, int ncols) {
+  for (int row = 0; row < nrows; row++) {
+    for (int col = 0; col < ncols; col++) {
+      if (maze[row][col] == 0) {
+        if (row > 0 && maze[row - 1][col] == 0) {
+          addEdge(graph, getVertex(row, col, ncols),
+                  getVertex(row - 1, col, ncols));
+        }
+        if (row < nrows - 1 && maze[row + 1][col] == 0) {
+          addEdge(graph, getVertex(row, col, ncols),
+                  getVertex(row + 1, col, ncols));
+        }
+        if (col > 0 && maze[row][col - 1] == 0) {
+          addEdge(graph, getVertex(row, col, ncols),
+                  getVertex(row, col - 1, ncols));
+        }
+        if (col < ncols - 1 && maze[row][col + 1] == 0) {
+          addEdge(graph, getVertex(row, col, ncols),
+                  getVertex(row, col + 1, ncols));
+        }
+      }
+    }
+  }
+}
+
 int main(void) {
 
-  graph *m_graph = create_graph(5);
-  addEdge(m_graph, 0, 1);
-  addEdge(m_graph, 0, 4);
-  addEdge(m_graph, 1, 2);
-  addEdge(m_graph, 1, 3);
-  addEdge(m_graph, 1, 4);
-  addEdge(m_graph, 2, 3);
-  addEdge(m_graph, 3, 4);
+  // graph *m_graph = create_graph(5);
+  // addEdge(m_graph, 0, 1);
+  // addEdge(m_graph, 0, 4);
+  // addEdge(m_graph, 1, 2);
+  // addEdge(m_graph, 1, 3);
+  // addEdge(m_graph, 1, 4);
+  // addEdge(m_graph, 2, 3);
+  // addEdge(m_graph, 3, 4);
 
-  printGraph(m_graph);
+  // printGraph(m_graph);
+  graph *gp = create_graph(5 * 5);
+
+  createGraphFromMaze(gp, maze, 5, 5);
+
+  DFS(gp, getVertex(0, 0, 5));
 
   return (EXIT_SUCCESS);
 }
