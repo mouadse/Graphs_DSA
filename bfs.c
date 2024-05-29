@@ -70,22 +70,34 @@ int dequeue(queue *ourQueue) {
   return (data);
 }
 
-int main(void) {
+// Let's implement BFS first
+
+void BFS(int G[][7], int start, int n) {
   queue *ourQueue = create_queue();
-
-  enqueue(ourQueue, 1);
-  enqueue(ourQueue, 2);
-  enqueue(ourQueue, 3);
-  enqueue(ourQueue, 4);
-  enqueue(ourQueue, 5);
-  enqueue(ourQueue, 6);
-  enqueue(ourQueue, 7);
-  enqueue(ourQueue, 8);
-
-  while (ourQueue->size) {
-    int val = dequeue(ourQueue);
-    printf("The val is %d\n", val);
+  static int visited[7] = {0};
+  int i = start;
+  printf("%d\n", i);
+  visited[i] = 1;
+  enqueue(ourQueue, i);
+  while (!is_empty(ourQueue)) {
+    i = dequeue(ourQueue);
+    for (int j = 0; j < n; j++) {
+      if (G[i][j] == 1 && visited[j] == 0) {
+        printf("%d\n", j);
+        visited[j] = 1;
+        enqueue(ourQueue, j);
+      }
+    }
   }
-  free(ourQueue);
+}
+
+int main(void) {
+
+  int G[7][7] = {{0, 0, 0, 0, 0, 0, 0}, {0, 0, 1, 1, 0, 0, 0},
+                 {0, 1, 0, 0, 1, 0, 0}, {0, 1, 0, 0, 1, 0, 0},
+                 {0, 0, 1, 1, 0, 1, 1}, {0, 0, 0, 0, 1, 0, 0},
+                 {0, 0, 0, 0, 1, 0, 0}};
+
+  BFS(G, 3, 7);
   return (EXIT_SUCCESS);
 }
