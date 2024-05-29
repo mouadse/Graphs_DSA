@@ -110,7 +110,9 @@ int main(void) {
                  {0, 1, 0, 0, 1, 0, 0}, {0, 1, 0, 0, 1, 0, 0},
                  {0, 0, 1, 1, 0, 1, 1}, {0, 0, 0, 0, 1, 0, 0},
                  {0, 0, 0, 0, 1, 0, 0}};
-
+  printf("This is DFS: \n");
   DFS(G, 3, 7);
+  printf("This is BFS: \n");
+  BFS(G, 3, 7);
   return (EXIT_SUCCESS);
 }
