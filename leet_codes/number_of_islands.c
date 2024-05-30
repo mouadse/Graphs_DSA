@@ -1,7 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-
 int directions[][2] = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
 
 void DFS(char **grid, int col, int row, int cols, int rows) {
