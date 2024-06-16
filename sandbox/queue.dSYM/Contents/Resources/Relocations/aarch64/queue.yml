@@ -1,0 +1,8 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     queue
+relocations:
+  - { offset: 0x26, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x8, symBinAddr: 0x100003D4C, symSize: 0x34 }
+  - { offset: 0x3B, size: 0x8, addend: 0x0, symName: _.str, symObjAddr: 0xE0, symBinAddr: 0x100003E60, symSize: 0x0 }
+  - { offset: 0x5E, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x8, symBinAddr: 0x100003D4C, symSize: 0x34 }
+...
