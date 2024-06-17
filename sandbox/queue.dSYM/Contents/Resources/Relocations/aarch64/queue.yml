@@ -1,0 +1,20 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     queue
+relocations:
+  - { offset: 0x26, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x8, symBinAddr: 0x10000219C, symSize: 0x324 }
+  - { offset: 0x3B, size: 0x8, addend: 0x0, symName: ___func__.create, symObjAddr: 0x20E0, symBinAddr: 0x100003C60, symSize: 0x0 }
+  - { offset: 0x6B, size: 0x8, addend: 0x0, symName: _.str, symObjAddr: 0x2100, symBinAddr: 0x100003C80, symSize: 0x0 }
+  - { offset: 0x88, size: 0x8, addend: 0x0, symName: ___func__.enqueue, symObjAddr: 0x2120, symBinAddr: 0x100003CA0, symSize: 0x0 }
+  - { offset: 0xA5, size: 0x8, addend: 0x0, symName: ___func__.dropQueue, symObjAddr: 0x2140, symBinAddr: 0x100003CC0, symSize: 0x0 }
+  - { offset: 0xC2, size: 0x8, addend: 0x0, symName: ___func__.deque, symObjAddr: 0x2160, symBinAddr: 0x100003CE0, symSize: 0x0 }
+  - { offset: 0xDF, size: 0x8, addend: 0x0, symName: _.str.1, symObjAddr: 0x2180, symBinAddr: 0x100003D00, symSize: 0x0 }
+  - { offset: 0x100, size: 0x8, addend: 0x0, symName: _count, symObjAddr: 0x37A0, symBinAddr: 0x100008920, symSize: 0x0 }
+  - { offset: 0x110, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x8, symBinAddr: 0x10000219C, symSize: 0x324 }
+  - { offset: 0x154, size: 0x8, addend: 0x0, symName: _enqueue, symObjAddr: 0x32C, symBinAddr: 0x1000024C0, symSize: 0x62C }
+  - { offset: 0x194, size: 0x8, addend: 0x0, symName: _dropQueue, symObjAddr: 0x958, symBinAddr: 0x100002AEC, symSize: 0x228 }
+  - { offset: 0x1E2, size: 0x8, addend: 0x0, symName: _create, symObjAddr: 0xB80, symBinAddr: 0x100002D14, symSize: 0x2D0 }
+  - { offset: 0x20A, size: 0x8, addend: 0x0, symName: _create_node, symObjAddr: 0xE50, symBinAddr: 0x100002FE4, symSize: 0x204 }
+  - { offset: 0x240, size: 0x8, addend: 0x0, symName: _isEmpty, symObjAddr: 0x1054, symBinAddr: 0x1000031E8, symSize: 0x10C }
+  - { offset: 0x268, size: 0x8, addend: 0x0, symName: _deque, symObjAddr: 0x1160, symBinAddr: 0x1000032F4, symSize: 0x6F8 }
+...
