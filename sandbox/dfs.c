@@ -1,5 +1,4 @@
 #include <assert.h>
-#include <cstdio>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -24,7 +23,20 @@ void dfs(Graph *, int);
 node *create_node(int val);
 
 int main(void) {
-  printf("Hello World!!!\n");
+
+  Graph *graph = createGraph(9);
+  addEdge(graph, 0, 1);
+  addEdge(graph, 0, 2);
+  addEdge(graph, 1, 2);
+  addEdge(graph, 2, 3);
+  addEdge(graph, 3, 5);
+  addEdge(graph, 3, 6);
+  addEdge(graph, 6, 7);
+  addEdge(graph, 6, 8);
+  addEdge(graph, 7, 8);
+  printf("DFS from 0 is:\n");
+  dfs(graph, 0);
+  printf("\n");
   return (EXIT_SUCCESS);
 }
 
@@ -73,5 +85,19 @@ void printGraph(Graph *g) {
       tmp = tmp->next;
     }
     printf("\n");
+  }
+}
+
+void dfs(Graph *g, int vertex) {
+  assert(g != NULL);
+  node *adj_list = g->adj_list[vertex];
+  node *tmp = adj_list;
+  g->visited[vertex] = 1;
+  printf("%d ", vertex);
+  while (tmp) {
+    int connected_vertex = tmp->vertex;
+    if (!g->visited[connected_vertex])
+      dfs(g, connected_vertex);
+    tmp = tmp->next;
   }
 }
