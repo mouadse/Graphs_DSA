@@ -1,4 +1,5 @@
 #include <assert.h>
+#include <cstdio>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -49,4 +50,28 @@ Graph *createGraph(int num_of_vertices) {
     g->adj_list[i] = NULL;
   }
   return (g);
+}
+
+void addEdge(Graph *g, int src, int dst) {
+  node *n = create_node(src);
+  n->next = g->adj_list[dst];
+  g->adj_list[dst] = n;
+
+  n = create_node(dst);
+  n->next = g->adj_list[src];
+  g->adj_list[src] = n;
+}
+
+void printGraph(Graph *g) {
+  assert(g != NULL);
+  int v;
+  for (v = 0; v < g->num_of_vertices; v++) {
+    node *tmp = g->adj_list[v];
+    printf("Node of the following vertex are %d\n", v);
+    while (tmp != NULL) {
+      printf("%d -> ", tmp->vertex);
+      tmp = tmp->next;
+    }
+    printf("\n");
+  }
 }
