@@ -44,6 +44,9 @@ int main(void) {
   addEdge(g, 2, 4);
   addEdge(g, 3, 4);
   bfs(g, 0);
+  free(g->adjList);
+  free(g->visited);
+  free(g);
   return (EXIT_SUCCESS);
 }
 
@@ -64,9 +67,12 @@ void bfs(graph *g, int startVertex) {
         g->visited[adjVertex] = 1;
         enqueue(q, adjVertex);
       }
+      node *curr = tmp;
       tmp = tmp->next;
+      free(curr);
     }
   }
+  free(q);
 }
 
 node *create_node(int val) {
