@@ -21,22 +21,56 @@ typedef struct Graph {
   int num_of_vertices;
 } graph;
 
+// Function signatures
+node *create_node(int val);
+graph *create_graph(int vertices);
+void addEdge(graph *g, int src, int dst);
+queue *create_queue();
+void enqueue(queue *q, int ver);
+int isEmpty(queue *q);
+int dequeue(queue *q);
+int poolQueue(queue *q);
+
+// Function definitions
 node *create_node(int val) {
   node *n = malloc(sizeof(node));
   if (!n)
-    return (NULL);
+    return NULL;
   n->vertex = val;
   n->next = NULL;
-  return (n);
+  return n;
+}
+
+graph *create_graph(int vertices) {
+  graph *g = malloc(sizeof(graph));
+  g->num_of_vertices = vertices;
+  g->adjList = malloc(sizeof(node *) * vertices);
+  g->visited = malloc(sizeof(int) * vertices);
+
+  for (int i = 0; i < vertices; i++) {
+    g->visited[i] = 0;
+    g->adjList[i] = NULL;
+  }
+  return g;
+}
+
+void addEdge(graph *g, int src, int dst) {
+  node *n = create_node(src);
+  n->next = g->adjList[dst];
+  g->adjList[dst] = n;
+
+  n = create_node(dst);
+  n->next = g->adjList[src];
+  g->adjList[src] = n;
 }
 
 queue *create_queue() {
   queue *q = malloc(sizeof(queue));
   if (!q)
-    return (NULL);
+    return NULL;
   q->front = -1;
   q->rear = -1;
-  return (q);
+  return q;
 }
 
 void enqueue(queue *q, int ver) {
@@ -51,21 +85,25 @@ void enqueue(queue *q, int ver) {
   }
 }
 
-int isEmpty(queue *q) { return (q->rear == -1); }
+int isEmpty(queue *q) {
+  return (q->rear == -1);
+}
 
 int dequeue(queue *q) {
   int value = -1;
   assert(q != NULL);
   if (isEmpty(q)) {
-    printf("The queue is isEmpty!!!\n");
-    return (value);
+    printf("The queue is empty!!!\n");
+    return value;
   } else {
     value = q->items[q->front];
     q->front++;
     if (q->front > q->rear)
       q->front = q->rear = -1;
   }
-  return (value);
+  return value;
 }
 
-int poolQueue(queue *q) { return (q->items[q->front]); }
+int poolQueue(queue *q) {
+  return (q->items[q->front]);
+}
