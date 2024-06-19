@@ -30,8 +30,36 @@ void enqueue(queue *q, int ver);
 int isEmpty(queue *q);
 int dequeue(queue *q);
 int poolQueue(queue *q);
+void bfs(graph *g, int startVertex);
+
+int main(void) {
+  // code goes here
+
+  return (EXIT_SUCCESS);
+}
 
 // Function definitions
+
+void bfs(graph *g, int startVertex) {
+  queue *q = create_queue();
+  g->visited[startVertex] = 1;
+  enqueue(q, startVertex);
+  printf("BFS from %d\n", startVertex);
+  while (!isEmpty(q)) {
+    printf("%d ", poolQueue(q));
+    int currentVertex = dequeue(q);
+    node *tmp = g->adjList[currentVertex];
+    while (tmp) {
+      int adjVertex = tmp->vertex;
+      if (g->visited[adjVertex] == 0) {
+        g->visited[adjVertex] = 1;
+        enqueue(q, adjVertex);
+      }
+      tmp = tmp->next;
+    }
+  }
+}
+
 node *create_node(int val) {
   node *n = malloc(sizeof(node));
   if (!n)
@@ -85,9 +113,7 @@ void enqueue(queue *q, int ver) {
   }
 }
 
-int isEmpty(queue *q) {
-  return (q->rear == -1);
-}
+int isEmpty(queue *q) { return (q->rear == -1); }
 
 int dequeue(queue *q) {
   int value = -1;
@@ -104,6 +130,4 @@ int dequeue(queue *q) {
   return value;
 }
 
-int poolQueue(queue *q) {
-  return (q->items[q->front]);
-}
+int poolQueue(queue *q) { return (q->items[q->front]); }
