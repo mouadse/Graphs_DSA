@@ -35,6 +35,15 @@ void bfs(graph *g, int startVertex);
 int main(void) {
   // code goes here
 
+  graph *g = create_graph(5);
+  addEdge(g, 0, 1);
+  addEdge(g, 0, 2);
+  addEdge(g, 1, 2);
+  addEdge(g, 1, 4);
+  addEdge(g, 1, 3);
+  addEdge(g, 2, 4);
+  addEdge(g, 3, 4);
+  bfs(g, 0);
   return (EXIT_SUCCESS);
 }
 
